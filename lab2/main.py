@@ -1,1 +1,4 @@
-from api import *
+import api 
+import ids
+
+api.getOneUser(id=ids)
