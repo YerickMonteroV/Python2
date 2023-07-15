@@ -2,10 +2,10 @@ from api import *
 from ids import elem
 import time
 
-user_ids = elem
+usuarios = elem
 
 star_time=time.time()
-for user_id in user_ids:
+for user_id in usuarios:
     
     result = getOneUser(user_id)
     print(result)
