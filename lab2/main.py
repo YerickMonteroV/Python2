@@ -1,16 +1,18 @@
+#importe todas las galerias que necesitaba.
 from api import *
 from ids import elem
 import time
-
+#cree una variable que se igualara a lista externa.
 usuarios = elem
-
-star_time=time.time()
-for user_id in usuarios:
-    
-    result = getOneUser(user_id)
-    print(result)
-
-duration=time.time()-star_time
-print(duration)
+#cree una variable para guardar el tiempo de inicio.
+tiempo=time.time()
+#corri un ciclo donde pregunte por cada uno de los usuarios que viene en la lista.
+for user in usuarios:
+    #Guarde la info en una variable y la imprimimos.
+    resultado = getOneUser(user)
+    print(resultado)
+#otra variable para hacer la medicion del tiempo de espera, restandole al tiempo actual el tiempo inicial de la funcion y al final imprimo el tiempo.
+espera=time.time()-tiempo
+print(espera)
 
 
