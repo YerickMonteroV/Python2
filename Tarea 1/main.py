@@ -20,6 +20,7 @@ while opcion!="0":
     print("opcion 5-Altura del Pokemon")
     print("opcion 6-Para ver una imagen del Pokemon")
     print("opcion 7-Para cambiar el Pokemon seleccionado")
+    print("opcion 8-Para cambiar el Pokemon seleccionado")
     print("Para salir digite:0")
     
     opcion=input("Digite la opcion:")
@@ -43,6 +44,9 @@ while opcion!="0":
        print(imag_pokemon(pok))
     elif opcion=="7":
        pok=input("Digite el nombre del nuevoPokemon que deseas buscar:")
+    elif opcion=="8":
+       x=input("Digite la generacion")
+       gen_pokemon(x)
 
    
        
