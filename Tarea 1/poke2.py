@@ -1,22 +1,19 @@
 import requests as req
 import urllib3
-
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 #A base URL will be created in order to call this variable in the functions created
 
-BASE_URL = "https://pokeapi.co/api/v2"
-pokemon = input("Provide pokemon name: ")
+PokeApi = "https://pokeapi.co/api/v2"
 
 #Function for pokemon stats
 
-def pokemon_stats(pokemon_name):
-    url_poke_stats = f"{BASE_URL}/pokemon/{pokemon_name.lower()}"
+def est_pokemon(pokemon_name):
+    url_poke_stats = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     response = req.get(url_poke_stats, verify=False)
 
     if response.status_code == 200:
         stats_details = response.json()
         stats = stats_details["stats"]
-
-        print(f"Stats de {pokemon_name.capitalize()}:")
         for stat in stats:
             stat_name = stat["stat"]["name"]
             stat_value = stat["base_stat"]
@@ -27,28 +24,24 @@ def pokemon_stats(pokemon_name):
 
 #Function for pokemon type
 
-def pokemon_type(pokemon_name):
-    url_poke_type = f"{BASE_URL}/pokemon/{pokemon_name.lower()}"
+def tipo_pokemon(pokemon_name):
+    url_poke_type = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     response = req.get(url_poke_type, verify=False)
 
     if response.status_code == 200:
         type_details = response.json()
-        types = type_details["types"]["name"]
-        print(types)
-
-
-        #print(f"Tipos de {pokemon_name.capitalize()}:")
-       # for poke_type in types:
-           # type_name = poke_type["type"]["name"]
-           # print(f"- {type_name}")
+        types = type_details["types"]
+        for poke_type in types:
+            type_name = poke_type["type"]["name"]
+            print(f"- {type_name}")
     else:
         print(f"No se pudo obtener la información del Pokémon {pokemon_name.capitalize()}.")
 
 
 #Function pokemon abilities
 
-def pokemon_abilities(pokemon_name):
-    url_poke_abilities = f"{BASE_URL}/pokemon/{pokemon_name.lower()}"
+def abil_pokemon(pokemon_name):
+    url_poke_abilities = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     response = req.get(url_poke_abilities, verify=False)
 
     if response.status_code == 200:
@@ -63,8 +56,8 @@ def pokemon_abilities(pokemon_name):
 
 #Function of pokemon height
 
-def pokemon_height(pokemon_name):
-    url_poke_height = f"{BASE_URL}/pokemon/{pokemon_name.lower()}"
+def alt_pokemon(pokemon_name):
+    url_poke_height = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     height_response = req.get(url_poke_height, verify=False)
 
     if height_response.status_code == 200:
@@ -79,8 +72,8 @@ def pokemon_height(pokemon_name):
 
 #Function for pokemon weight
 
-def pokemon_weight(pokemon_name):
-    url_poke_weight = f"{BASE_URL}/pokemon/{pokemon_name.lower()}"
+def peso_pokemon(pokemon_name):
+    url_poke_weight = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     weight_response = req.get(url_poke_weight, verify=False)
 
     if weight_response.status_code == 200:
@@ -89,13 +82,12 @@ def pokemon_weight(pokemon_name):
         weight = int(weight_hectograms / 10) # Convert hectograms to kilograms
         print(f"The weight of {pokemon_name.capitalize()} is : {weight} kilograms")
 
-pokemon_abilities(pokemon_name="charmander")
 
-import requests
 
-def get_pokemon_by_generation(generation):
+
+def gen_pokemon(generation):
     url = f"https://pokeapi.co/api/v2/generation/{generation}"
-    response = requests.get(url)
+    response = req.get(url)
 
     if response.status_code == 200:
         data = response.json()
@@ -108,23 +100,17 @@ def get_pokemon_by_generation(generation):
         print(f"Error al obtener datos de la generación {generation}. Código de estado: {response.status_code}")
 
 
-generation_number = 1
-get_pokemon_by_generation(generation_number)
 
-def get_pokemon_image_url(pokemon_name):
+
+def imag_pokemon(pokemon_name):
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
-    response = requests.get(url)
+    response = req.get(url)
 
     if response.status_code == 200:
         data = response.json()
         image_url = data["sprites"]["front_default"]
-
-        if image_url:
-            return image_url
-        else:
-            return f"El Pokémon {pokemon_name} no tiene una imagen disponible."
+        return image_url
     else:
-        return f"Error al obtener datos del Pokémon {pokemon_name}. Código de estado: {response.status_code}"
-
-
+       return f"El Pokémon {pokemon_name} no tiene una imagen disponible."
+  
 
