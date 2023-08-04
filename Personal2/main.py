@@ -3,8 +3,6 @@ from poke2 import *
 
 
 #variable para guardar la opcion seleccionada
-
-
 #Ciclo para mostar el menu de opciones
 print("Bienvenidos al Pokedex de Papo")
 pok=input("Digite el nombre del Pokemon que deseas buscar:")
@@ -32,7 +30,7 @@ while opcion!="0":
        print(est_pokemon(pok))
     elif opcion=="3":
        print(f"Las abilidades de {pok.capitalize()} son:")
-       print(abil_pokemon(pok))
+       print(habil_pokemon(pok))
     elif opcion=="4":
        print(f"El peso de {pok.capitalize()} es:")
        print(peso_pokemon(pok))

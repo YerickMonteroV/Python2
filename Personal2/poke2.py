@@ -1,57 +1,59 @@
+#Importe las librerias necesarias
 import requests as req
 import urllib3
+#Utilice esta herramienta para quitar un error que me salia al correr el codigo
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-#A base URL will be created in order to call this variable in the functions created
-
+#Escogi la usar esta informacion porque me 
+#
+#Hice una variable con el valor del URL del API para comodidad al escribir el codigo
 PokeApi = "https://pokeapi.co/api/v2"
-
 #Function for pokemon stats
 
 def est_pokemon(pokemon_name):
-    url_poke_stats = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
-    response = req.get(url_poke_stats, verify=False)
+    urlestatus = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
+    response = req.get(urlestatus, verify=False)
 
     if response.status_code == 200:
-        stats_details = response.json()
-        stats = stats_details["stats"]
-        for stat in stats:
+        datapoke = response.json()
+        datos = datapoke["stats"]
+        for stat in datos:
             stat_name = stat["stat"]["name"]
             stat_value = stat["base_stat"]
             print(f"- {stat_name}: {stat_value}")
     else:
-        print(f"No se pudo obtener la información del Pokémon {pokemon_name.capitalize()}.")
+        print("Error")
 
 
 #Function for pokemon type
 
 def tipo_pokemon(pokemon_name):
-    url_poke_type = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
-    response = req.get(url_poke_type, verify=False)
+    urltipo_poke = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
+    response = req.get(urltipo_poke, verify=False)
 
     if response.status_code == 200:
-        type_details = response.json()
-        types = type_details["types"]
-        for poke_type in types:
-            type_name = poke_type["type"]["name"]
-            print(f"- {type_name}")
+        datapoke = response.json()
+        tipos = datapoke["types"]
+        for tipo in tipos:
+            tipo_poke = tipo["type"]["name"]
+            print(tipo_poke)
     else:
-        print(f"No se pudo obtener la información del Pokémon {pokemon_name.capitalize()}.")
+        print("Error")
 
 
 #Function pokemon abilities
 
-def abil_pokemon(pokemon_name):
-    url_poke_abilities = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
-    response = req.get(url_poke_abilities, verify=False)
+def habil_pokemon(pokemon_name):
+    urlHabil = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
+    response = req.get(urlHabil, verify=False)
 
     if response.status_code == 200:
-        abilities_details = response.json()
-        abilities = abilities_details["abilities"]
+        datapoke = response.json()
+        habilidades = datapoke["abilities"]
         
-        print(f" {pokemon_name.capitalize()} abilities:")
-        for ability in abilities:
-            ability_name = ability["ability"]["name"]
-            print(f"- {ability_name}")
+        print(f"Las abilidades {pokemon_name.capitalize()} abilities:")
+        for habilidad in habilidades:
+            pokehabil = habilidad["ability"]["name"]
+            print(pokehabil)
 
 
 #Function of pokemon height
