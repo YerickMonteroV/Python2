@@ -18,7 +18,7 @@ while opcion!="0":
     print("opcion 5-Altura del Pokemon")
     print("opcion 6-Para ver una imagen del Pokemon")
     print("opcion 7-Para cambiar el Pokemon seleccionado")
-    print("opcion 8-Para cambiar el Pokemon seleccionado")
+    print("opcion 8-Para ver todos los pokemones segun la generacion seleccionada(1-9)")
     print("Para salir digite:0")
     
     opcion=input("Digite la opcion:")
@@ -36,10 +36,10 @@ while opcion!="0":
        print(peso_pokemon(pok))
     elif opcion=="5":
        print(f"La altura de {pok.capitalize()} es:")
-       print(alt_pokemon(pok))
+       print(poke_altura(pok))
     elif opcion=="6":
        print(f"Abra el link para ver una imagen de {pok.capitalize()}")
-       print(imag_pokemon(pok))
+       print(imag_poke(pok))
     elif opcion=="7":
        pok=input("Digite el nombre del nuevoPokemon que deseas buscar:")
     elif opcion=="8":

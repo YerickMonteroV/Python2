@@ -3,12 +3,44 @@ import requests as req
 import urllib3
 #Utilice esta herramienta para quitar un error que me salia al correr el codigo
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-#Escogi la usar esta informacion porque me 
+#Escogi la usar esta informacion porque el juego pokemon fue parte importante de mi infancia
+#me parecio interesante toda la info sobre cada uno de los pokemones de todas las generaciones
 #
 #Hice una variable con el valor del URL del API para comodidad al escribir el codigo
 PokeApi = "https://pokeapi.co/api/v2"
-#Function for pokemon stats
 
+
+#Esta funcion nos devuelve todos los pokemones de la generacion solicitada.
+def gen_pokemon(generation):
+    url_gen = f"https://pokeapi.co/api/v2/generation/{generation}"
+    response = req.get(url_gen)
+
+    if response.status_code == 200:
+        datagen = response.json()
+        lista_poke = datagen["pokemon_species"]
+
+        print(f"Estos son los pokemones de la generacion {generation}:")
+        for pokemon in lista_poke:
+            print(pokemon["name"])
+    else:
+        print("Error")
+
+#Esta funcion nos devuelve un URL de una imagen del pokemon solicitado.
+def imag_poke(pokemon_name):
+    url_imag = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
+    response = req.get(url_imag)
+
+    if response.status_code == 200:
+        dataimag = response.json()
+        imagen_url = dataimag["sprites"]["front_default"]
+        return imagen_url
+    else:
+       print("Imagen no disponible.")
+
+
+#Esta funcion nos devuelven datos del pokemon, esta me parecio muy interesante porque tenia
+#que buscar varia info para mostrar al mismo tiempo como
+#el nombre de la data(defensa, ataque, y otros) y su valor
 def est_pokemon(pokemon_name):
     urlestatus = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     response = req.get(urlestatus, verify=False)
@@ -24,8 +56,7 @@ def est_pokemon(pokemon_name):
         print("Error")
 
 
-#Function for pokemon type
-
+#Esta funcion unicamente de devuelve el tipo de pokemon.
 def tipo_pokemon(pokemon_name):
     urltipo_poke = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     response = req.get(urltipo_poke, verify=False)
@@ -40,8 +71,7 @@ def tipo_pokemon(pokemon_name):
         print("Error")
 
 
-#Function pokemon abilities
-
+#Esta funcion me devuelve las habilidades que tenga el pokemon
 def habil_pokemon(pokemon_name):
     urlHabil = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
     response = req.get(urlHabil, verify=False)
@@ -50,69 +80,37 @@ def habil_pokemon(pokemon_name):
         datapoke = response.json()
         habilidades = datapoke["abilities"]
         
-        print(f"Las abilidades {pokemon_name.capitalize()} abilities:")
+        print(f"Las habilidades de {pokemon_name.capitalize()} son:")
         for habilidad in habilidades:
             pokehabil = habilidad["ability"]["name"]
             print(pokehabil)
 
+#Esta funcion es bastante sencilla ya que unicamente devuelve el valor de la altura del pokemon.
+def poke_altura(pokemon_name):
+    url_altura = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
+    response = req.get(url_altura, verify=False)
 
-#Function of pokemon height
-
-def alt_pokemon(pokemon_name):
-    url_poke_height = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
-    height_response = req.get(url_poke_height, verify=False)
-
-    if height_response.status_code == 200:
-        height_details = height_response.json()
-        height_decimeters = height_details["height"]
-        height = height_decimeters / 10  # Convert decimeters to meters
-        print(f"The height of {pokemon_name.capitalize()} is: {height} meters.")
+    if response.status_code == 200:
+        alturas = response.json()
+        altu_poke = alturas["height"]
+        print(f"La altura de {pokemon_name.capitalize()} es de {altu_poke} meters.")
     else:
-        print(f"No se pudo obtener la información del Pokémon {pokemon_name.capitalize()}.")
+        print("Error")
 
 
 
-#Function for pokemon weight
-
+#Esta funcion es bastante sencilla tambien ya que igual a la anterior,
+#esta unicamente devuelve el peso del pokemon.
 def peso_pokemon(pokemon_name):
-    url_poke_weight = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
-    weight_response = req.get(url_poke_weight, verify=False)
-
-    if weight_response.status_code == 200:
-        weight_details = weight_response.json()
-        weight_hectograms = weight_details["weight"]
-        weight = int(weight_hectograms / 10) # Convert hectograms to kilograms
-        print(f"The weight of {pokemon_name.capitalize()} is : {weight} kilograms")
-
-
-
-
-def gen_pokemon(generation):
-    url = f"https://pokeapi.co/api/v2/generation/{generation}"
-    response = req.get(url)
+    url_peso = f"{PokeApi}/pokemon/{pokemon_name.lower()}"
+    response = req.get(url_peso, verify=False)
 
     if response.status_code == 200:
-        data = response.json()
-        pokemon_list = data["pokemon_species"]
-
-        print(f"Listado de Pokémon en la generación {generation}:")
-        for pokemon in pokemon_list:
-            print(pokemon["name"])
-    else:
-        print(f"Error al obtener datos de la generación {generation}. Código de estado: {response.status_code}")
+        pesos = response.json()
+        peso_poke = pesos["weight"]
+        print(f"El peso de {pokemon_name.capitalize()} es de {peso_poke} kilograms")
 
 
 
-
-def imag_pokemon(pokemon_name):
-    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
-    response = req.get(url)
-
-    if response.status_code == 200:
-        data = response.json()
-        image_url = data["sprites"]["front_default"]
-        return image_url
-    else:
-       return f"El Pokémon {pokemon_name} no tiene una imagen disponible."
   
 
