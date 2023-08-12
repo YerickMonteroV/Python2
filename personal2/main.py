@@ -1,5 +1,6 @@
 #importamos las funciones 
 from fun_poke import *
+import fun_poke_graf1 as grafi
 
 print("Bienvenidos al Pokedex de Papo")
 #variable para guardar la opcion seleccionada
@@ -25,7 +26,7 @@ while opcion!="0":
       print(tipo_pokemon(pok))
     elif opcion=="2":
        print(f"El estatus de {pok.capitalize()} es:")
-       print(est_pokemon(pok))
+       print(grafi.est_pokemon_graf(pok))
     elif opcion=="3":
        print(f"Las abilidades de {pok.capitalize()} son:")
        print(habil_pokemon(pok))
@@ -34,7 +35,7 @@ while opcion!="0":
        print(peso_pokemon(pok))
     elif opcion=="5":
        print(f"La altura de {pok.capitalize()} es:")
-       print(poke_altura(pok))
+       print(grafi.plot_altura_peso(pok))
     elif opcion=="6":
        print(f"Abra el link para ver una imagen de {pok.capitalize()}")
        print(imag_poke(pok))

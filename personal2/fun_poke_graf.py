@@ -35,5 +35,5 @@ def est_pokemon(pokemon_name):
         print("Error")
 
 # Llamada a la función con el nombre de un Pokémon
-est_pokemon("pikachu")
+
 
